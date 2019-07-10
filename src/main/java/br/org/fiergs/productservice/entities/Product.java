@@ -1,30 +1,30 @@
 package br.org.fiergs.productservice.entities;
 
 import br.org.fiergs.productservice.entities.enumeration.ProductType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Entity
+@Table(name = "CAD_PRODUCT")
+@SequenceGenerator(name = "seqCad_Product", sequenceName = "SEQCAD_PRODUCT", allocationSize = 1)
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "seqCad_Product")
     private Long id;
 
-    @NotEmpty(message = "Código não pode ser vazio!")
+    @NotEmpty(message = "Código é obrigatório!")
     private String code;
 
-    @NotEmpty(message = "Descrição não pode ser vazia!")
+    @NotEmpty(message = "Descrição é obrigatória!")
     private String description;
 
     private String descriptionEnglish;
